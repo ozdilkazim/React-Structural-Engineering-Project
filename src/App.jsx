@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      {/* <h1>Regtangular Calculator</h1>
+      <h1>Regtangular Calculator</h1>
       <div className="card">
         <CalcRect h0={100} w0={100}/>
       </div>
@@ -29,10 +29,10 @@ function App() {
       <h1>I-Beam Calculator</h1>
       <div className="card">
         <CalcIBeam  h0={376} tw0={25} wfb0={150} tfb0={38} wft0={250} tft0={38} />
-      </div> */}
+      </div>
       <h1>L-Beam Calculator</h1>
       <div className="card">
-        <CalcLBeam  h0={376} tw0={25} wfb0={150} tfb0={38} wft0={0} tft0={0}  />
+        <CalcLBeam  h0={376} tw0={25} wfb0={150} tfb0={38} />
       </div>
     </>
   )
