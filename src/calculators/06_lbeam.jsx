@@ -1,12 +1,17 @@
 // import React, {useState, useEffect} from 'react';
-function CalcLBeam (h, tw, wfb, tfb) {
-    hw = h - tfb;
+function CalcLBeam (props) {
+    let A2, A3, y2, y3, x1, x2, x3, ym, xm, area, I2x, I2y, I3x, I3y, momentofInartiaX, momentofInartiaY, d2x, d2y, d3x, d3y, ix, iy, welxt, welyt, welxb, welyb;
+    let h = props.h0;
+    let tw = props.tw0;
+    let wfb = props.wfb0;
+    let tfb = props.tfb0;
+    let hw = h - tfb;
 
     // Lets calculate centroid of section 
 
     // Segment 2
     A2 = hw * tw;
-    y2 = tfb + hw / 2;
+    y2 = hw / 2 + tfb;
     x2 = tw / 2;
     I2x = hw * Math.pow(tw , 3) / 12
     I2y = tw * Math.pow(hw , 3) / 12
@@ -28,10 +33,10 @@ function CalcLBeam (h, tw, wfb, tfb) {
     // Distance to centroid
 
     // S2
-    d2y = Math.abs((tfb + hw / 2) - ym);
+    d2y = hw / 2 + tfb - ym;
     d2x = tw / 2 - xm;
     // S3
-    d3y = Math.abs((tfb / 2) - ym);
+    d3y = tfb / 2 - ym;
     d3x = wfb / 2 - xm;
 
     // Moment of Inertia
@@ -40,7 +45,7 @@ function CalcLBeam (h, tw, wfb, tfb) {
     momentofInartiaY = momentofInartiaY.toExponential();
     momentofInartiaX = momentofInartiaX.toExponential();
 
-    // Radii of gyration
+    // Radii of gyrationl; 
     ix = Math.sqrt(momentofInartiaX / area);
     iy = Math.sqrt(momentofInartiaY / area);
 
@@ -60,6 +65,20 @@ function CalcLBeam (h, tw, wfb, tfb) {
     console.log("ix = ", ix, "iyy =", iy);
     console.log("Wel,xb = ", welxb, "Wel,yb =", welyb);
     console.log("Wel,xt = ", welxt, "Wel,yt =", welyt);
+
+    return (
+        <>
+        <p>Area = {area}</p>
+        <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
+        <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>
+        <p>Radii of Gyration at X = {ix}</p>
+        <p>Radii of Gyration at X = = {iy}</p>
+        <p>Section Modulus X - Top = {welxt}</p>
+        <p>Section Modulus X - Bottom = {welxb}</p>
+        <p>Section Modulus Y - Top = {welyt}</p>
+        <p>Section Modulus Y - Bottom = {welyb}</p>
+        </>
+    )
 }
 
 export default CalcLBeam;

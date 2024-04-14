@@ -1,14 +1,6 @@
 // import React, {useState, useEffect} from 'react';
 function CalcCircular(props) {
-    let area;
-    let momentofInartiaX;
-    let momentofInartiaY;
-    let ix;
-    let iy;
-    let welxt;
-    let welyt;
-    let welxb;
-    let welyb;
+    let area, momentofInartiaX, momentofInartiaY, ix, iy, welxt, welyt, welxb, welyb;
     let D = props.d0;
     area = Math.PI * Math.pow(D, 2) / 4;
     momentofInartiaX = Math.PI * Math.pow(D, 4) / 64;

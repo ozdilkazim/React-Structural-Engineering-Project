@@ -1,14 +1,6 @@
 // import React, {useState, useEffect} from 'react';
 function CalcTube (props) {    
-    let area;
-    let momentofInartiaX;
-    let momentofInartiaY;
-    let ix;
-    let iy;
-    let welxt;
-    let welyt;
-    let welxb;
-    let welyb;
+    let area, momentofInartiaX, momentofInartiaY, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
     let w = props.w0;
     let t = props.t0;
