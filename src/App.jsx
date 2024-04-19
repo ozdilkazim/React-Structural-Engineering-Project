@@ -6,6 +6,7 @@ import CalcPipe from "./calculators/04_pipe";
 import CalcIBeam from "./calculators/05_ibeam";
 import CalcLBeam from "./calculators/06_lbeam";
 import CalcCBeam from "./calculators/07_cbeam";
+import CalcTBeam from "./calculators/08_tbeam";
 function App() {
 
   return (
@@ -33,6 +34,10 @@ function App() {
       <h1>L-Beam Calculator</h1>
       <div className="card">
         <CalcLBeam  h0={376} tw0={25} wfb0={150} tfb0={38} />
+      </div>
+      <h1>T-Beam Calculator</h1>
+      <div className="card">
+        <CalcTBeam  h0={150} tw0={10} wft0={150} tft0={15} />
       </div>
     </>
   )
