@@ -15,6 +15,7 @@ function CalcRect(props) {
     welyb = welyt = momentofInartiaY / (h/2); 
     return (
         <>
+        <p>Regtangular Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
         <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>

@@ -16,6 +16,7 @@ function CalcPipe (props) {
      welyb = welyt = momentofInartiaY / (D/2);     
      return (
         <>
+        <p>Pipe Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
         <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>

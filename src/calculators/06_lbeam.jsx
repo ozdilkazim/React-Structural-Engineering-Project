@@ -1,6 +1,6 @@
 // import React, {useState, useEffect} from 'react';
 function CalcLBeam (props) {
-    let A2, A3, y2, y3, x1, x2, x3, ym, xm, area, I2x, I2y, I3x, I3y, momentofInartiaX, momentofInartiaY, d2x, d2y, d3x, d3y, ix, iy, welxt, welyt, welxb, welyb;
+    let A2, A3, y2, y3, x2, x3, ym, xm, area, I2x, I2y, I3x, I3y, momentofInartiaX, momentofInartiaY, d2x, d2y, d3x, d3y, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
     let tw = props.tw0;
     let wfb = props.wfb0;
@@ -68,6 +68,7 @@ function CalcLBeam (props) {
 
     return (
         <>
+        <p>L-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
         <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>

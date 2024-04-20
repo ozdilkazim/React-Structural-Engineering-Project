@@ -69,6 +69,7 @@ function CalcTBeam (props) {
 
     return (
         <>
+        <p>T-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
         <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>
