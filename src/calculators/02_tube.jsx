@@ -1,4 +1,5 @@
 // import React, {useState, useEffect} from 'react';
+import JXGBoard from 'jsxgraph-react-js'
 function CalcTube (props) {    
     let area, momentofInartiaX, momentofInartiaY, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -16,8 +17,31 @@ function CalcTube (props) {
     // Section Modulus 
     welxb = welxt = momentofInartiaX / (w/2);
     welyb = welyt = momentofInartiaY / (h/2); 
+
+    let logicJS = (brd) => {
+        var A = brd.create('point', [0,0],{fixed:true,size: 0 }),
+        B = brd.create('point',  [w,0],{fixed:true,size: 0}),
+        C = brd.create('point', [w,h],{fixed:true,size: 0}),
+        D = brd.create('point',  [0,h],{fixed:true,size: 0}),
+        rect = brd.create('polygon',[A,B,C,D],{hasInnerPoints:false});
+        var E = brd.create('point', [t,t],{fixed:true,size: 0}),
+        F = brd.create('point',  [w-t,t],{fixed:true,size: 0}),
+        G = brd.create('point', [w-t,h-t],{fixed:true,size: 0}),
+        H = brd.create('point',  [t,h-t],{fixed:true,size: 0}),
+        rect = brd.create('polygon',[E,F,G,H],{hasInnerPoints:false,strokeWidth: 0, fillColor: "white", fillOpacity: 1});
+    }
+
+
     return (
-        <>
+        <> 
+        <JXGBoard
+        logic={logicJS}
+        boardAttributes={{ 
+          axis: true, 
+          boundingbox: [-100, +h+100, +w+100, -100],
+          fixed: true,
+        }}
+        />
         <p>Tube Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>

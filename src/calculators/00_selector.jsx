@@ -41,15 +41,14 @@ function Selector() {
             {(() => {
                 switch(value) {
                     case "select-option" : return "";
-                    case "CalcRect" : return <CalcRect />;
-                    case "CalcTube" : return <CalcTube />;
-                    case "CalcCircular" : return <CalcCircular />;
-                    case "CalcPipe" : return <CalcPipe />;
-                    case "CalcIBeam" : return <CalcIBeam />;
-                    case "CalcLBeam" : return <CalcLBeam />;
+                    case "CalcRect" : return <CalcRect h0={150} w0={100}/>;
+                    case "CalcTube" : return <CalcTube h0={150} w0={100} t0={3}/>;
+                    case "CalcCircular" : return <CalcCircular d0={100} />;
+                    case "CalcPipe" : return <CalcPipe d0={100} t0={5} />;
+                    case "CalcIBeam" : return <CalcIBeam h0={376} tw0={25} wfb0={150} tfb0={38} wft0={250} tft0={38}/>;
+                    case "CalcLBeam" : return <CalcLBeam h0={150} tw0={20} wfb0={200} tfb0={25}/>;
                     case "CalcCBeam" : return <CalcCBeam />;
-                    case "CalcTBeam" : return <CalcTBeam />;
-
+                    case "CalcTBeam" : return <CalcTBeam h0={150} tw0={10} wft0={150} tft0={15}/>;
                 }
             })()}
 
