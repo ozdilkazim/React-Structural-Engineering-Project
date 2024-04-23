@@ -1,4 +1,4 @@
-import JXGBoard from 'jsxgraph-react-js'
+import JXGBoard2 from 'jsxgraph-react-js'
 
 function CalcRect(props) {
     let area, momentofInartiaX, momentofInartiaY, ix, iy, welxt, welyt, welxb, welyb;
@@ -17,16 +17,17 @@ function CalcRect(props) {
     welyb = welyt = momentofInartiaY / (h/2); 
 
     let logicJS = (brd) => {
-        var A = brd.create('point', [0,0],{fixed:true}),
-        B = brd.create('point',  [w,0],{fixed:true}),
-        C = brd.create('point', [w,h],{fixed:true}),
-        D = brd.create('point',  [0,h],{fixed:true}),
-        rect = brd.create('polygon',[A,B,C,D],{hasInnerPoints:false});
+        var A = brd.create('point', [0,0],{name:"", fixed:true,size: 0 }),
+        B = brd.create('point',  [w,0],{name:"", fixed:true,size: 0 }),
+        C = brd.create('point', [w,h],{name:"", fixed:true,size: 0 }),
+        D = brd.create('point',  [0,h],{name:"", fixed:true,size: 0 }),
+        Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
+        rect = brd.create('polygon',[A,B,C,D],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});
     }
 
     return (  
         <>
-        <JXGBoard
+        <JXGBoard2
           logic={logicJS}
           boardAttributes={{ 
             axis: true, 
@@ -34,7 +35,6 @@ function CalcRect(props) {
             fixed: true,
         }}
         />
-        <p>h = {h}, w={w}</p>
         <p>Regtangular Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
