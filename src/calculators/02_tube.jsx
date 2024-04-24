@@ -1,5 +1,6 @@
 // import React, {useState, useEffect} from 'react';
 import JXGBoard2 from 'jsxgraph-react-js'
+
 function CalcTube (props) {    
     let area, momentofInartiaX, momentofInartiaY, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -36,12 +37,12 @@ function CalcTube (props) {
     return (
         <> 
         <JXGBoard2
-        logic={logicJS}
-        boardAttributes={{ 
-          axis: true, 
-          boundingbox: [-100, +h+100, +w+100, -100],
-          fixed: true,
-        }}
+            logic={logicJS}
+            boardAttributes={{ 
+            axis: true, 
+            boundingbox: [-100, +h+100, +w+100, -100],
+            fixed: true,
+            }}
         />
         <p>Tube Calculation</p>
         <p>Area = {area}</p>
