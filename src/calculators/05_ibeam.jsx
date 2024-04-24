@@ -1,4 +1,5 @@
 // import React, {useState, useEffect} from 'react';
+import JXGBoard2 from 'jsxgraph-react-js'
 function CalcIBeam (props) {
     let A1, A2, A3, y1, y2, y3, x1, x2, x3, ym, xm, area, I1x, I1y, I2x, I2y, I3x, I3y, momentofInartiaX, momentofInartiaY, d1x, d1y, d2x, d2y, d3x, d3y, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -78,9 +79,56 @@ function CalcIBeam (props) {
     // console.log("ix = ", ix, "iyy =", iy);
     // console.log("Wel,xb = ", welxb, "Wel,yb =", welyb);
     // console.log("Wel,xt = ", welxt, "Wel,yt =", welyt);
+    
+    let coordinates = [
+        0, 0,
+        0, tfb,
+        wfb/2-tw/2, tfb,
+        wfb/2-tw/2, tfb+hw,
+        wfb/2-wft/2, tfb+hw,
+        wfb/2-wft/2, h,
+        wfb/2+wft/2, h,
+        wfb/2+wft/2, h-tft,
+        wfb/2+tw/2, h-tft,
+        wfb/2+tw/2, tfb,
+        wfb, tfb,
+        wfb, 0,
+    ]
+
+    if (wft > wfb) {
+        const plus = (wft - wfb) / 2;
+        for (let i= 0; i <coordinates.length; i+=2) {
+            coordinates[i] =  coordinates[i] + plus
+        }
+    } 
+
+    let logicJS = (brd) => {
+        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"A", fixed:true,size: 2 }),
+            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"B", fixed:true,size: 2 }),
+            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"C", fixed:true,size: 2 }),
+            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"D", fixed:true,size: 2 }),
+            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"E", fixed:true,size: 2 }),
+            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"F", fixed:true,size: 2 }),
+            G = brd.create('point', [coordinates[12], coordinates[13]],{name:"G", fixed:true,size: 2 }),
+            H = brd.create('point', [coordinates[14], coordinates[15]],{name:"H", fixed:true,size: 2 }),
+            I = brd.create('point', [coordinates[16], coordinates[17]],{name:"", fixed:true,size: 2 }),
+            J = brd.create('point', [coordinates[18], coordinates[19]],{name:"", fixed:true,size: 2 }),
+            K = brd.create('point', [coordinates[20], coordinates[21]],{name:"", fixed:true,size: 2 }),
+            L = brd.create('point', [coordinates[22], coordinates[23]],{name:"", fixed:true,size: 2 }),
+            T = brd.create('polygon', [A, B, C, D, E, F, G, H, I, J, K, L],{hasInnerPoints:false, strokeWidth: 0, fillOpacity: 1});    
+    }
 
     return (
         <>
+        <JXGBoard2
+            logic={logicJS}
+            boardAttributes={{ 
+            axis: true, 
+            boundingbox: [-100, +h+100, +h+100, -100],
+            fixed: true,
+            }}
+        />
+        <p>Coordinatres = {coordinates.join(", ")}</p>
         <p>I-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>

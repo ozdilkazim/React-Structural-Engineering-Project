@@ -21,18 +21,10 @@ function CalcPipe (props) {
         var A = brd.create('point', [D/2, D/2],{name:"", fixed:true,size: 0 }),
             B = brd.create('point', [D/2, 0],{name:"", fixed:true,size: 0 }),
             C = brd.create('circle', [A, B],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});
-
-        // Create another circle using the above circle
         var E = brd.create('point', [D/2, D/2],{name:"", fixed:true,size: 0 }),
             F = brd.create('point', [D/2, t],{name:"", fixed:true,size: 0 }),
             Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
             G = brd.create('circle', [E, F],{hasInnerPoints:false, strokeWidth: 0, fillColor: "white", fillOpacity: 1});
-
-        //  // Create a circle providing two points
-        //  var A = brd.create('point', [D/2,D/2],{name:"", fixed:true,size: 0 }),
-        //  B = brd.create('point',  [D/2,0],{name:"", fixed:true,size: 0}),s
-        //  circle = brd.create('circle',[A,B],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});
-        //  // Create another circle using the above circle
 
      }     
      return (
