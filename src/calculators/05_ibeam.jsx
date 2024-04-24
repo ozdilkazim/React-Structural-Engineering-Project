@@ -103,19 +103,21 @@ function CalcIBeam (props) {
     } 
 
     let logicJS = (brd) => {
-        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"A", fixed:true,size: 2 }),
-            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"B", fixed:true,size: 2 }),
-            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"C", fixed:true,size: 2 }),
-            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"D", fixed:true,size: 2 }),
-            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"E", fixed:true,size: 2 }),
-            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"F", fixed:true,size: 2 }),
-            G = brd.create('point', [coordinates[12], coordinates[13]],{name:"G", fixed:true,size: 2 }),
-            H = brd.create('point', [coordinates[14], coordinates[15]],{name:"H", fixed:true,size: 2 }),
-            I = brd.create('point', [coordinates[16], coordinates[17]],{name:"", fixed:true,size: 2 }),
-            J = brd.create('point', [coordinates[18], coordinates[19]],{name:"", fixed:true,size: 2 }),
-            K = brd.create('point', [coordinates[20], coordinates[21]],{name:"", fixed:true,size: 2 }),
-            L = brd.create('point', [coordinates[22], coordinates[23]],{name:"", fixed:true,size: 2 }),
-            T = brd.create('polygon', [A, B, C, D, E, F, G, H, I, J, K, L],{hasInnerPoints:false, strokeWidth: 0, fillOpacity: 1});    
+        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"", fixed:true,size: 0 }),
+            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"", fixed:true,size: 0 }),
+            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"", fixed:true,size: 0 }),
+            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"", fixed:true,size: 0 }),
+            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"", fixed:true,size: 0 }),
+            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"", fixed:true,size: 0 }),
+            G = brd.create('point', [coordinates[12], coordinates[13]],{name:"", fixed:true,size: 0 }),
+            H = brd.create('point', [coordinates[14], coordinates[15]],{name:"", fixed:true,size: 0 }),
+            I = brd.create('point', [coordinates[16], coordinates[17]],{name:"", fixed:true,size: 0 }),
+            J = brd.create('point', [coordinates[18], coordinates[19]],{name:"", fixed:true,size: 0 }),
+            K = brd.create('point', [coordinates[20], coordinates[21]],{name:"", fixed:true,size: 0 }),
+            L = brd.create('point', [coordinates[22], coordinates[23]],{name:"", fixed:true,size: 0 }),
+            L = brd.create('point', [coordinates[22], coordinates[23]],{name:"", fixed:true,size: 0 }),
+            Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
+            T = brd.create('polygon', [A, B, C, D, E, F, G, H, I, J, K, L],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});    
     }
 
     return (

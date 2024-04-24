@@ -47,8 +47,9 @@ function Selector() {
                     case "CalcPipe" : return <CalcPipe d0={100} t0={5} />;
                     case "CalcIBeam" : return <CalcIBeam h0={300} tw0={25} wfb0={350} tfb0={15} wft0={250} tft0={20}/>;
                     case "CalcLBeam" : return <CalcLBeam h0={150} tw0={20} wfb0={200} tfb0={25}/>;
-                    case "CalcCBeam" : return <CalcCBeam />;
-                    case "CalcTBeam" : return <CalcTBeam h0={150} tw0={10} wft0={150} tft0={15}/>;
+                    case "CalcCBeam" : return <CalcCBeam h0={300} tw0={50} wfb0={350} tfb0={50} wft0={250} tft0={50}/>;
+                    case "CalcTBeam" : return <CalcTBeam h0={150} tw0={50} wft0={150} tft0={50}/>;
+                    default :  return <CalcRect h0={150} w0={100}/>;
                 }
             })()}
 

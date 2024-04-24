@@ -1,4 +1,5 @@
 // import React, {useState, useEffect} from 'react';
+import JXGBoard2 from 'jsxgraph-react-js'
 function CalcTBeam (props) {
     let A1, A2, y1, y2, x1, x2, ym, xm, area, I1x, I1y, I2x, I2y, momentofInartiaX, momentofInartiaY, d1x, d1y, d2x, d2y, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -66,9 +67,40 @@ function CalcTBeam (props) {
     // console.log("ix = ", ix, "iyy =", iy);
     // console.log("Wel,xb = ", welxb, "Wel,yb =", welyb);
     // console.log("Wel,xt = ", welxt, "Wel,yt =", welyt);
+    let coordinates = [
+        wft/2-tw/2, 0,
+        wft/2+tw/2, 0,
+        wft/2+tw/2, hw,
+        wft, hw,
+        wft, h,
+        0, h,
+        0, hw,
+        wft/2-tw/2, hw,
+    ]
+
+    let logicJS = (brd) => {
+        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"", fixed:true,size: 0 }),
+            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"", fixed:true,size: 0 }),
+            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"", fixed:true,size: 0 }),
+            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"", fixed:true,size: 0 }),
+            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"", fixed:true,size: 0 }),
+            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"", fixed:true,size: 0 }),
+            G = brd.create('point', [coordinates[12], coordinates[13]],{name:"", fixed:true,size: 0 }),
+            H = brd.create('point', [coordinates[14], coordinates[15]],{name:"", fixed:true,size: 0 }),
+            Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
+            T = brd.create('polygon', [A, B, C, D, E, F, G, H],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});    
+    }
 
     return (
-        <>
+        <> 
+        <JXGBoard2
+            logic={logicJS}
+            boardAttributes={{ 
+            axis: true, 
+            boundingbox: [-100, +h+100, +h+100, -100],
+            fixed: true,
+            }}
+        />
         <p>T-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
