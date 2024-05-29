@@ -27,7 +27,7 @@ function Selector() {
     <>
         <div>
             <select value={value} onChange={handleChange} >
-                <option defaultValue="select-option">Select option</option>
+                <option defaultValue="select-option">Select Shape Option</option>
                 <option value="CalcRect">Regtangular</option>
                 {/* <option value="CalcTube">Tube</option>
                 <option value="CalcCircular">Circular</option>
