@@ -74,7 +74,7 @@ function CalcRect(props) {
          <div id="board-0-wrapper" className="jxgbox-wrapper">
             <div id="board-0" className="jxgbox" data-ar="1 / 1" width="500px" height="500px"></div>
         </div>
-        <p>Regtangular Calculation</p>
+        <p>Regtangular Calculation V2 </p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
         <p>Moment of Inertia at Y Axis = {momentofInartiaY}</p>
