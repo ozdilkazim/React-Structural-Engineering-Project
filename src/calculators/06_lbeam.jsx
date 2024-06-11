@@ -1,5 +1,6 @@
 // import React, {useState, useEffect} from 'react';
-import JXGBoard2 from 'jsxgraph-react-js'
+import { JSXGraph } from "jsxgraph";
+import { useEffect } from 'react'
 function CalcLBeam (props) {
     let A2, A3, y2, y3, x2, x3, ym, xm, area, I2x, I2y, I3x, I3y, momentofInartiaX, momentofInartiaY, d2x, d2y, d3x, d3y, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -67,36 +68,60 @@ function CalcLBeam (props) {
     console.log("Wel,xb = ", welxb, "Wel,yb =", welyb);
     console.log("Wel,xt = ", welxt, "Wel,yt =", welyt);
 
-    let coordinates = [
-        0, 0,
-        0, h,
-        tw, h,
-        tw, tfb,
-        wfb, tfb,
-        wfb, 0,
-    ]
+    const BOARDID = 'board-0';
+ 
+    // input data from LMS
+    useEffect(() => {
+        let input = [
+            0, 0,                   // point A(x, y)
+            0, h,                   // point B(x, y)
+            tw, h,                  // point C(x, y)
+            tw, tfb,                // point E(x, y)
+            wfb, tfb,               // point F(x, y)
+            wfb, 0,                  // point G(x, y)
+            
+        ];    
+        // JSXGraph board
+        const board = JXG.JSXGraph.initBoard(BOARDID, {
+            boundingbox: [-50, wfb + 150, h + 150, -50],
+            axis: true,
+            resize:{enabled: false},
+            pan: {enabled: true, needTwoFingers: true,},
+            browserPan: true,
+            zoom: {enabled: true}
+        });
 
-    let logicJS = (brd) => {
-        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"", fixed:true,size: 0 }),
-            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"", fixed:true,size: 0 }),
-            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"", fixed:true,size: 0 }),
-            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"", fixed:true,size: 0 }),
-            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"", fixed:true,size: 0 }),
-            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"", fixed:true,size: 0 }),
-            Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
-            T = brd.create('polygon', [A, B, C, D, E, F],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});    
+        let A = board.create('point', [input[0], input[1]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let B = board.create('point', [input[2], input[3]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let C = board.create('point', [input[4], input[5]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let E = board.create('point', [input[6], input[7]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let F = board.create('point', [input[8], input[9]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let G = board.create('point', [input[10], input[11]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        
+        
+        let lBeam = board.create('polygon', [A, B, C,E, F, G], {
+            borders: {
+                label: { offset: [-10, 10] },
+                withLabel: true,
+            }
+        });
+        // Overwrite the labels of the borders:
+        for (let i = 0; i < lBeam.borders.length; i++) {
+            lBeam.borders[i].label.setText( () => lBeam.borders[i].L().toFixed(0) );
+        }
+    }, []); 
+
+    const boardstyle = {
+        width: wfb + 100 + "px",
+        height: h + 100 + "px"
     }
 
     return (
         <>
-        <JXGBoard2
-            logic={logicJS}
-            boardAttributes={{ 
-            axis: true, 
-            boundingbox: [-100, +h+100, +h+100, -100],
-            fixed: true,
-            }}
-        />
+         <div id="board-0-wrapper" className="jxgbox-wrapper">
+            <div id="board-0" className="jxgbox" data-ar="1 / 1" style={boardstyle}></div>
+        </div>
+        <br />
         <p>L-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>

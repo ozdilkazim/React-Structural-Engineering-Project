@@ -1,5 +1,5 @@
-// import React, {useState, useEffect} from 'react';
-import JXGBoard2 from 'jsxgraph-react-js'
+import { JSXGraph } from "jsxgraph";
+import { useEffect } from 'react'
 function CalcTBeam (props) {
     let A1, A2, y1, y2, x1, x2, ym, xm, area, I1x, I1y, I2x, I2y, momentofInartiaX, momentofInartiaY, d1x, d1y, d2x, d2y, ix, iy, welxt, welyt, welxb, welyb;
     let h = props.h0;
@@ -67,40 +67,63 @@ function CalcTBeam (props) {
     // console.log("ix = ", ix, "iyy =", iy);
     // console.log("Wel,xb = ", welxb, "Wel,yb =", welyb);
     // console.log("Wel,xt = ", welxt, "Wel,yt =", welyt);
-    let coordinates = [
-        wft/2-tw/2, 0,
-        wft/2+tw/2, 0,
-        wft/2+tw/2, hw,
-        wft, hw,
-        wft, h,
-        0, h,
-        0, hw,
-        wft/2-tw/2, hw,
-    ]
+    
+    const BOARDID = 'board-0';
+ 
+    // input data from LMS
+    useEffect(() => {
+        let input = [
+            wft/2-tw/2, 0,          // point A(x, y)
+            wft/2+tw/2, 0,          // point B(x, y)
+            wft/2+tw/2, hw,         // point C(x, y)
+            wft, hw,                // point E(x, y)
+            wft, h,                 // point F(x, y)
+            0, h,                   // point G(x, y)
+            0, hw,                  // point H(x, y)
+            wft/2-tw/2, hw,         // point J(x, y)
+        ];    
+        // JSXGraph board
+        const board = JXG.JSXGraph.initBoard(BOARDID, {
+            boundingbox: [-50, wft + 150, hw + 150, -50],
+            axis: true,
+            resize:{enabled: false},
+            pan: {enabled: true, needTwoFingers: true,},
+            browserPan: true,
+            zoom: {enabled: true}
+        });
 
-    let logicJS = (brd) => {
-        var A = brd.create('point', [coordinates[0], coordinates[1]],{name:"", fixed:true,size: 0 }),
-            B = brd.create('point', [coordinates[2], coordinates[3]],{name:"", fixed:true,size: 0 }),
-            C = brd.create('point', [coordinates[4], coordinates[5]],{name:"", fixed:true,size: 0 }),
-            D = brd.create('point', [coordinates[6], coordinates[7]],{name:"", fixed:true,size: 0 }),
-            E = brd.create('point', [coordinates[8], coordinates[9]],{name:"", fixed:true,size: 0 }),
-            F = brd.create('point', [coordinates[10], coordinates[11]],{name:"", fixed:true,size: 0 }),
-            G = brd.create('point', [coordinates[12], coordinates[13]],{name:"", fixed:true,size: 0 }),
-            H = brd.create('point', [coordinates[14], coordinates[15]],{name:"", fixed:true,size: 0 }),
-            Z = brd.create('point',  [0,0],{name:"0", fixed:true,size: 5}),
-            T = brd.create('polygon', [A, B, C, D, E, F, G, H],{hasInnerPoints:false, strokeWidth: 0, fillColor: "blue", fillOpacity: 1});    
+        let A = board.create('point', [input[0], input[1]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let B = board.create('point', [input[2], input[3]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let C = board.create('point', [input[4], input[5]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let E = board.create('point', [input[6], input[7]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let F = board.create('point', [input[8], input[9]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let G = board.create('point', [input[10], input[11]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let H = board.create('point', [input[12], input[13]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        let J = board.create('point', [input[14], input[15]], {name: '',snapToGrid:true,fixed: true,size: 0});
+        
+        let tBeam = board.create('polygon', [A, B, C,E, F, G, H, J], {
+            borders: {
+                label: { offset: [-10, 10] },
+                withLabel: true,
+            }
+        });
+        // Overwrite the labels of the borders:
+        for (let i = 0; i < tBeam.borders.length; i++) {
+            tBeam.borders[i].label.setText( () => tBeam.borders[i].L().toFixed(0) );
+        }
+    }, []); 
+
+    const boardstyle = {
+        width: wft + 100 + "px",
+        height: hw + 100 + "px"
     }
-
+    
     return (
         <> 
-        <JXGBoard2
-            logic={logicJS}
-            boardAttributes={{ 
-            axis: true, 
-            boundingbox: [-100, +h+100, +h+100, -100],
-            fixed: true,
-            }}
-        />
+         <div id="board-0-wrapper" className="jxgbox-wrapper">
+            <div id="board-0" className="jxgbox" data-ar="1 / 1" style={boardstyle}></div>
+        </div>
+        <br />
         <p>T-Beam Calculation</p>
         <p>Area = {area}</p>
         <p>Moment of Inertia at X Axis = {momentofInartiaX}</p>
